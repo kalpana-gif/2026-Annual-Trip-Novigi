@@ -37,6 +37,8 @@ Crisp white, ocean blue and seafoam; the supplied resort photographs; self-hoste
 
 Motion for React powers the staged hero reveal, subtle photo parallax, scroll progress, navigation underline, itinerary transitions and animated room filtering. Section details arrive in gentle sequences; button and packing interactions provide brief feedback. `MotionConfig`, `useReducedMotion` and CSS media queries respect reduced-motion preferences. The decorative scroll cue runs for three short cycles and stops.
 
+The first visit in each browser tab opens with a short coastal welcome: a resort photo clipped into a gently swelling ocean wave, island-time typography, and two simple, softly moving waves along the bottom. The wave artwork is inline SVG and needs no extra image downloads. It prepares the hero image and fonts, plays for about 2.6 seconds, then reveals the homepage; a 4.5-second limit keeps slow or failed assets from blocking access. Skip intro or Escape dismisses it immediately. Repeat visits in that tab, links to specific sections, and reduced-motion preferences bypass the welcome. The session flag is stored as `novigi-welcome-2026`; open a fresh tab to replay it.
+
 The site includes semantic landmarks, a skip link, visible focus outlines, live search result announcements, arrow-key itinerary tabs, mobile menu Escape handling, reduced-motion styles, and responsive layouts down to 320px. The countdown does not announce every second to screen readers.
 
 No backend or third-party analytics are used. The guest directory is part of the static build, so deploy it to an access-controlled host if it should only be available to staff. The packing checklist stores only checked item labels locally.

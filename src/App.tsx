@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from 'react'
+import { forwardRef, useCallback, useEffect, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 import { AnimatePresence, motion, useIsPresent, useReducedMotion } from 'motion/react'
 import { ArrowDownToLine, ArrowRight, ArrowUp, ArrowUpRight, BedDouble, Bus, CalendarDays, Camera, Check, CheckCheck, ChevronDown, Clock3, Coffee, Copy, Heart, Info, KeyRound, Mail, MapPin, Menu, MessageCircle, Minus, Phone, Search, Sparkles, Sun, Sunset, TreePalm, Users, Utensils, Waves, X } from 'lucide-react'
@@ -6,6 +6,7 @@ import { rooms, trip } from './data/trip'
 import type { Room, RoomType } from './data/trip'
 import { calendarEvent, countdownTo, filterRooms } from './lib/trip'
 import { Hero, ScrollProgress, travelEase } from './components/TravelMotion'
+import { rememberWelcome, shouldShowWelcome, TripWelcome } from './components/TripWelcome'
 
 const totalGuests = rooms.reduce((sum, room) => sum + room.guests.length, 0)
 const iconMap = { bus: Bus, palm: TreePalm, utensils: Utensils, sunset: Sunset, coffee: Coffee, sun: Sun, sparkles: Sparkles, camera: Camera, key: KeyRound }
@@ -20,12 +21,33 @@ function SectionLabel({ children, light = false }: { children: React.ReactNode; 
 }
 
 function App() {
+  const [welcomeVisible, setWelcomeVisible] = useState(shouldShowWelcome)
+  const [pageReady, setPageReady] = useState(!welcomeVisible)
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const [toast, setToast] = useState('')
+  const siteContent = useRef<HTMLDivElement>(null)
   const menuButton = useRef<HTMLButtonElement>(null)
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const reducedMotion = useReducedMotion()
+
+  const dismissWelcome = useCallback(() => {
+    rememberWelcome()
+    setWelcomeVisible(false)
+  }, [])
+
+  useEffect(() => {
+    if (pageReady) return
+    const originalOverflow = document.documentElement.style.overflow
+    document.documentElement.style.overflow = 'hidden'
+    return () => { document.documentElement.style.overflow = originalOverflow }
+  }, [pageReady])
+
+  function completeWelcome() {
+    setPageReady(true)
+    // Move focus off the departing dialog without scrolling or skipping navigation.
+    requestAnimationFrame(() => siteContent.current?.focus({ preventScroll: true }))
+  }
 
   useEffect(() => {
     document.querySelectorAll<HTMLElement>('.destination-facts .trip-fact, .essentials-grid .essential').forEach((element, index) => {
@@ -85,6 +107,10 @@ function App() {
   const navigation = [{ id: 'trip-details', label: 'The getaway' }, { id: 'itinerary', label: 'Itinerary' }, { id: 'rooms', label: 'Our rooms' }, { id: 'good-to-know', label: 'Good to know' }]
 
   return <>
+    <AnimatePresence onExitComplete={completeWelcome}>
+      {welcomeVisible && <TripWelcome key="trip-welcome" onComplete={dismissWelcome} />}
+    </AnimatePresence>
+    <div ref={siteContent} className="site-content" tabIndex={-1} inert={!pageReady}>
     <a className="skip-link" href="#main-content">Skip to main content</a>
     <header className="site-header">
       <ScrollProgress />
@@ -100,7 +126,7 @@ function App() {
     </header>
 
     <main id="main-content">
-      <Hero />
+      <Hero ready={pageReady} />
 
       <Countdown />
 
@@ -151,6 +177,7 @@ function App() {
       <div className="footer-bottom"><span>© {trip.year} Novigi · Made for our people <Heart size={11} /></span><span>{trip.imageNote}</span></div>
     </footer>
     <div className={`toast ${toast ? 'toast-visible' : ''}`} role="status" aria-live="polite">{toast && <><CheckCheck size={20} /><span>{toast}</span><button onClick={() => setToast('')} aria-label="Dismiss notification"><X size={17} /></button></>}</div>
+    </div>
   </>
 }
 
