@@ -7,6 +7,8 @@ import type { Room, RoomType } from './data/trip'
 import { calendarEvent, countdownTo, filterRooms } from './lib/trip'
 import { Hero, ScrollProgress, travelEase } from './components/TravelMotion'
 import { rememberWelcome, shouldShowWelcome, TripWelcome } from './components/TripWelcome'
+import { TripChat } from './components/TripChat'
+import { FloatingChatLink } from './components/FloatingChatLink'
 
 const totalGuests = rooms.reduce((sum, room) => sum + room.guests.length, 0)
 const iconMap = { bus: Bus, palm: TreePalm, utensils: Utensils, sunset: Sunset, coffee: Coffee, sun: Sun, sparkles: Sparkles, camera: Camera, key: KeyRound }
@@ -27,6 +29,7 @@ function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [toast, setToast] = useState('')
   const siteContent = useRef<HTMLDivElement>(null)
+  const header = useRef<HTMLElement>(null)
   const menuButton = useRef<HTMLButtonElement>(null)
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const reducedMotion = useReducedMotion()
@@ -71,11 +74,15 @@ function App() {
     const close = (event: globalThis.KeyboardEvent) => {
       if (event.key === 'Escape' && menuOpen) { setMenuOpen(false); menuButton.current?.focus() }
     }
-    const desktop = window.matchMedia('(min-width: 768px)')
+    const desktop = window.matchMedia('(min-width: 1051px)')
     const onResize = () => { if (desktop.matches) setMenuOpen(false) }
+    const onPointerDown = (event: PointerEvent) => {
+      if (menuOpen && event.target instanceof Node && !header.current?.contains(event.target)) setMenuOpen(false)
+    }
     document.addEventListener('keydown', close)
+    document.addEventListener('pointerdown', onPointerDown)
     desktop.addEventListener('change', onResize)
-    return () => { document.removeEventListener('keydown', close); desktop.removeEventListener('change', onResize) }
+    return () => { document.removeEventListener('keydown', close); document.removeEventListener('pointerdown', onPointerDown); desktop.removeEventListener('change', onResize) }
   }, [menuOpen])
 
   function notify(message: string) {
@@ -104,7 +111,7 @@ function App() {
     catch { notify('Copy is unavailable in this browser. You can select and copy the trip details on this page.') }
   }
 
-  const navigation = [{ id: 'trip-details', label: 'The getaway' }, { id: 'itinerary', label: 'Itinerary' }, { id: 'rooms', label: 'Our rooms' }, { id: 'good-to-know', label: 'Good to know' }]
+  const navigation = [{ id: 'trip-details', label: 'The getaway', icon: TreePalm }, { id: 'itinerary', label: 'Itinerary', icon: CalendarDays }, { id: 'rooms', label: 'Our rooms', icon: BedDouble }, { id: 'good-to-know', label: 'Good to know', icon: Info }, { id: 'trip-chat', label: 'Trip chat', icon: MessageCircle }]
 
   return <>
     <AnimatePresence onExitComplete={completeWelcome}>
@@ -112,17 +119,20 @@ function App() {
     </AnimatePresence>
     <div ref={siteContent} className="site-content" tabIndex={-1} inert={!pageReady}>
     <a className="skip-link" href="#main-content">Skip to main content</a>
-    <header className="site-header">
+    <header ref={header} className="site-header">
       <ScrollProgress />
       <div className="nav-container">
         <a className="wordmark" href="#home" aria-label="Novigi annual trip home"><img className="brand-logo" src="/images/novigi-logo.png" alt="Novigi" width="436" height="164" /><span className="brand-divider" /><span className="brand-edition">OFF THE CLOCK<span>ANNUAL TRIP · {trip.year}</span></span></a>
         <nav className="desktop-nav" aria-label="Main navigation">
-          {navigation.map(item => <a key={item.id} href={`#${item.id}`} className={activeSection === item.id ? 'active' : ''} aria-current={activeSection === item.id ? 'location' : undefined}>{item.label}{activeSection === item.id && <motion.span className="nav-indicator" layoutId="navigation-indicator" transition={{ duration: reducedMotion ? 0 : 0.35, ease: travelEase }} />}</a>)}
+          {navigation.map(item => <a key={item.id} href={`#${item.id}`} className={activeSection === item.id ? 'active' : ''} aria-current={activeSection === item.id ? 'location' : undefined}><span className="nav-item-symbol" aria-hidden="true"><item.icon className="nav-item-icon" size={16} strokeWidth={1.7} /></span><span className="nav-item-label">{item.label}</span>{activeSection === item.id && <motion.span className="nav-indicator" aria-hidden="true" layoutId="navigation-indicator" transition={reducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 34, mass: 0.75 }} />}</a>)}
         </nav>
         <a className="button button-ocean nav-cta" href="#rooms"><span>Find my room</span><span className="nav-cta-icon" aria-hidden="true"><Search size={16} strokeWidth={1.8} /></span></a>
         <button ref={menuButton} className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} aria-controls="mobile-navigation">{menuOpen ? <X /> : <Menu />}</button>
       </div>
-      {menuOpen && <motion.nav id="mobile-navigation" className="mobile-nav" aria-label="Mobile navigation" initial={reducedMotion ? false : { opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reducedMotion ? 0 : 0.25, ease: travelEase }}>{navigation.map(item => <a key={item.id} href={`#${item.id}`} onClick={() => setMenuOpen(false)}>{item.label}<ArrowUpRight size={18} /></a>)}</motion.nav>}
+      {menuOpen && <motion.nav id="mobile-navigation" className="mobile-nav" aria-label="Mobile navigation" initial={reducedMotion ? false : { opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reducedMotion ? 0 : 0.25, ease: travelEase }}>
+        <p className="mobile-nav-heading"><Waves size={17} aria-hidden="true" />A little escape, a tap away.</p>
+        {navigation.map(item => <a key={item.id} href={`#${item.id}`} className={activeSection === item.id ? 'active' : ''} aria-current={activeSection === item.id ? 'location' : undefined} onClick={() => setMenuOpen(false)}><span className="mobile-nav-icon"><item.icon size={19} strokeWidth={1.7} aria-hidden="true" /></span><span>{item.label}</span><ArrowUpRight size={16} aria-hidden="true" /></a>)}
+      </motion.nav>}
     </header>
 
     <main id="main-content">
@@ -157,6 +167,7 @@ function App() {
       <Itinerary onDownload={downloadCalendar} />
       <RoomAllocations />
       <HelpfulInformation onCopy={copySummary} />
+      <TripChat />
 
       <section className="closing-section" aria-labelledby="closing-title">
         <div className="closing-contours" aria-hidden="true" />
@@ -176,6 +187,7 @@ function App() {
       <a href="#home" className="back-top">Back to the sunshine <ArrowUp size={16} /></a>
       <div className="footer-bottom"><span>© {trip.year} Novigi · Made for our people <Heart size={11} /></span><span>{trip.imageNote}</span></div>
     </footer>
+    <FloatingChatLink hidden={!pageReady || menuOpen || Boolean(toast)} />
     <div className={`toast ${toast ? 'toast-visible' : ''}`} role="status" aria-live="polite">{toast && <><CheckCheck size={20} /><span>{toast}</span><button onClick={() => setToast('')} aria-label="Dismiss notification"><X size={17} /></button></>}</div>
     </div>
   </>

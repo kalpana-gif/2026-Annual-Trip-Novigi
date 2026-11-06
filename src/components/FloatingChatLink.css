@@ -1,0 +1,44 @@
+.floating-chat {
+  position: fixed;
+  right: calc(26px + env(safe-area-inset-right, 0px));
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 60px;
+  padding: 10px 21px 10px 15px;
+  border: 1px solid #ffffff70;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, #086caa, #087d8b);
+  box-shadow: 0 8px 26px #0a557e30, 0 2px 5px #153e5912, inset 0 1px 0 #ffffff30;
+}
+.floating-chat-icon { position: relative; display: grid; place-items: center; width: 34px; height: 34px; }
+.floating-chat-sparkle { position: absolute; top: -4px; right: -5px; color: #b8f0e5; }
+.floating-chat-label { font-size: 13px; line-height: 1.4; font-weight: 650; letter-spacing: .01em; }
+.floating-chat-label > span { display: block; margin-top: 2px; font-size: 10px; font-weight: 400; color: #e0f5f7; }
+.floating-chat:focus-visible { outline: 3px solid #086caa; outline-offset: 4px; }
+.site-footer { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .floating-chat:hover { transform: translateY(-4px); box-shadow: 0 13px 30px #0a557e3b, 0 2px 5px #153e5912; }
+  .floating-chat:hover .floating-chat-icon { transform: rotate(-8deg); }
+  .floating-chat-icon { transition: transform .25s ease; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .floating-chat:active { transform: scale(.96); }
+}
+@media (max-width: 767px) {
+  .floating-chat {
+    right: calc(16px + env(safe-area-inset-right, 0px));
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    width: 58px;
+    height: 58px;
+    min-height: 58px;
+    padding: 0;
+    justify-content: center;
+  }
+  .floating-chat-label { display: none; }
+  .site-content:has(input:not([type="checkbox"]):focus, textarea:focus) .floating-chat { display: none; }
+}
