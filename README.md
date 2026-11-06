@@ -39,6 +39,7 @@ The feed checks for new messages every five seconds while the tab is visible, ca
 2. Copy `.env.example` to `.env.local` and replace the example `DATABASE_URL` with that URL. This is a **server-only secret**; never use a `VITE_` prefix.
 3. Run `npm run chat:setup` once to create the chat table and index. The command is safe to repeat. Development will use this hosted database whenever `DATABASE_URL` is set, so use a separate database for previews/testing if production messages should stay separate.
    Run this command again when upgrading an existing hosted chat to add the deletion history table; existing messages are preserved. Local SQLite databases upgrade automatically on server restart.
+   Setup also enables row-level security on both tables. Use the database owner connection for the server; do not add public Supabase policies for these tables. Browser requests go through the chat function, which enforces deletion ownership and message validation.
 4. Set `DATABASE_URL` in the hosting project’s server/function environment settings, then deploy this repository:
    - **Vercel:** choose the Vite preset, `npm run build`, and output directory `dist`. `api/chat.ts` serves `/api/chat` on the Node runtime.
    - **Netlify:** `netlify.toml` supplies the build configuration. The function in `netlify/functions/chat.ts` registers `/api/chat`. Make `DATABASE_URL` available to Functions.

@@ -13,4 +13,8 @@ CREATE TABLE IF NOT EXISTS chat_deletions (
   id SERIAL PRIMARY KEY,
   message_id INTEGER NOT NULL UNIQUE REFERENCES chat_messages(id)
 );
+-- The server connects as the table owner. Browser-facing database roles must
+-- not read visitor keys or bypass the chat API's validation and ownership checks.
+ALTER TABLE chat_messages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE chat_deletions ENABLE ROW LEVEL SECURITY;
 `
