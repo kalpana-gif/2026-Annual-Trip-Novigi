@@ -1,0 +1,274 @@
+/* One Roboto type family, with weight and ocean color creating emphasis. */
+:root {
+  --ease-travel: cubic-bezier(.22, 1, .36, 1);
+  font-optical-sizing: auto;
+}
+
+h1, h2, h3, h4 { text-wrap: balance; }
+h2 {
+  font-family: var(--font-sans);
+  font-weight: 430;
+  letter-spacing: -.045em;
+  line-height: 1.18;
+}
+.text-accent { font-family: var(--font-sans); font-style: normal; font-weight: 650; letter-spacing: -.045em; }
+.destination-photo-copy { font-weight: 400; letter-spacing: -.04em; }
+.section-heading h2, .room-section-heading h2, .centered-heading h2 {
+  font-size: clamp(36px, 3.65vw, 52px);
+}
+.destination-content h2 { font-size: clamp(47px, 4.5vw, 64px); line-height: 1.08; }
+.section-label { font-size: 11px; font-weight: 600; letter-spacing: .17em; }
+.overline { font-size: 10px; letter-spacing: .14em; font-weight: 600; }
+.section-description,
+.destination-content .section-description,
+.room-section-heading .section-description,
+.centered-heading .section-description {
+  font-size: 15px;
+  line-height: 1.85;
+  font-weight: 400;
+  letter-spacing: .005em;
+  text-wrap: pretty;
+}
+.destination-content .section-description { max-width: 450px; }
+.desktop-nav a { font-size: 13px; font-weight: 450; }
+.brand-edition { font-size: 10px; letter-spacing: .15em; }
+.brand-edition > span { font-size: 9px; letter-spacing: .08em; }
+.button { font-size: 13px; font-weight: 550; letter-spacing: .015em; border-radius: 8px; }
+.nav-cta {
+  font-size: 12px;
+  font-weight: 550;
+  gap: 14px;
+  border-radius: 999px;
+  border-color: #ffffff26;
+  background: linear-gradient(115deg, #075e99, #087ca5);
+  box-shadow: 0 4px 12px #086caa20, inset 0 1px 0 #ffffff24;
+}
+.nav-cta-icon { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #ffffff20; transition: background .25s, transform .35s var(--ease-travel); }
+.nav-cta:hover { box-shadow: 0 7px 20px #086caa2b, inset 0 1px 0 #ffffff24; }
+.nav-cta:hover .nav-cta-icon { background: #ffffff30; }
+.nav-cta-icon > svg { transition: transform .35s var(--ease-travel); }
+.text-link, .destination-content > .text-link { font-size: 12px; line-height: 1.6; }
+
+.hero { height: 700px; }
+.hero-content { padding-top: 88px; animation: none; }
+.hero-image { height: calc(100% + 160px); top: -80px; }
+.hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: .2em; gap: 12px; }
+.hero h1 { font-size: clamp(64px, 6.2vw, 94px); margin-top: 27px; line-height: 1.08; }
+.hero-line { display: block; overflow: hidden; padding: 0 .04em .14em; margin: 0 -.04em -.14em; }
+.hero-line > span { display: block; white-space: nowrap; }
+.hero-line-sans { font-family: var(--font-sans); font-weight: 400; font-size: .95em; letter-spacing: -.055em; line-height: 1.22; }
+.hero-line-accent { font-family: var(--font-sans); font-size: 1.1em; font-weight: 650; font-style: normal; letter-spacing: -.055em; line-height: 1.14; color: #bceafa; }
+.hero-copy { margin-top: 28px; font-size: 17px; line-height: 1.8; font-weight: 350; letter-spacing: .012em; }
+.hero-actions { margin-top: 30px; }
+.hero-actions .button { min-height: 51px; padding-inline: 22px; font-size: 13px; }
+.hero-bottom { padding-top: 25px; bottom: 39px; }
+.hero-bottom strong { font-size: 14px; font-weight: 450; letter-spacing: 0; }
+.hero-meta-label { font-size: 9px; letter-spacing: .15em; }
+.hero-duration { font-size: 12px; }
+.hero-shade { background: linear-gradient(90deg, #0c3555ce 0%, #0c35557d 46%, #0c355518 90%), linear-gradient(0deg, #0c3555d9 0%, transparent 48%); }
+.escape-seal { top: 70px; right: 70px; }
+.countdown-heading p { font-family: var(--font-sans); font-size: 18px; font-weight: 420; letter-spacing: -.02em; }
+.countdown-heading .overline { font-size: 10px; letter-spacing: .14em; }
+.countdown-unit strong { font-family: var(--font-sans); font-weight: 350; font-size: 40px; letter-spacing: -.055em; font-variant-numeric: tabular-nums; }
+.countdown { gap: 31px; }
+.countdown-unit:not(:last-child)::after { top: 8px; right: -18px; }
+.countdown-date { font-size: 10px; }
+
+.trip-fact strong { font-size: 14px; line-height: 1.5; font-weight: 500; }
+.trip-fact small { font-size: 11px; line-height: 1.65; }
+.trip-fact div > span { font-size: 10px; font-weight: 500; letter-spacing: .1em; }
+.fact-icon { width: 38px; height: 40px; }
+.destination-facts { row-gap: 24px; }
+.hotel-fact { padding-top: 24px; }
+.calendar-button, .show-rooms .button { font-size: 12px; min-height: 44px; }
+.day-tab strong { font-size: 14px; font-weight: 500; line-height: 1.5; }
+.day-date { font-size: 11px; }
+.day-number { font-family: var(--font-sans); font-size: 27px; font-weight: 350; letter-spacing: -.06em; }
+.timeline-title h3 { font-family: var(--font-sans); font-size: 26px; font-weight: 450; letter-spacing: -.035em; }
+.timeline-title p { font-size: 13px; line-height: 1.7; }
+.timeline-time { font-size: 11px; font-weight: 500; }
+.timeline-event h4 { font-size: 14px; font-weight: 550; letter-spacing: -.012em; }
+.timeline-event p { font-size: 13px; line-height: 1.8; text-wrap: pretty; }
+.timeline-event { padding-bottom: 28px; }
+.confirmed-tag { font-size: 8px; padding: 3px 5px; }
+.timeline-panel { animation: none; }
+.room-stats strong { font-family: var(--font-sans); font-size: 32px; font-weight: 350; letter-spacing: -.06em; }
+.room-stats div > span { font-size: 10px; letter-spacing: .1em; }
+.room-filters button { font-size: 13px; min-height: 44px; }
+.room-category h3 { font-family: var(--font-sans); font-size: 22px; font-weight: 500; letter-spacing: -.035em; margin-top: 6px; }
+.room-category div > span { font-size: 9px; font-weight: 500; letter-spacing: .14em; }
+.guest-list li { font-size: 15px; font-weight: 420; letter-spacing: .005em; min-height: 35px; }
+.guest-avatar { width: 35px; height: 35px; font-size: 11px; font-weight: 500; }
+.room-card-footer { font-size: 11px; }
+.room-card { animation: none; transition: box-shadow .3s, border-color .3s; }
+.room-card:hover { transform: none; box-shadow: 0 12px 30px #13456410; }
+.room-grid { position: relative; }
+.essential h3, .packing-heading h3, .reminders > h3, .organizer-copy h3 {
+  font-family: var(--font-sans);
+  font-size: 25px;
+  font-weight: 450;
+  letter-spacing: -.035em;
+}
+.essential p { font-size: 14px; line-height: 1.85; text-wrap: pretty; }
+.packing-card > p, .organizer-copy p { font-size: 13px; line-height: 1.8; }
+.packing-list label { font-size: 13px; min-height: 28px; }
+.faq-list summary { font-size: 13px; font-weight: 450; }
+.faq-list details p { font-size: 13px; line-height: 1.85; }
+.closing-content h2 { font-size: 59px; }
+.closing-content p { font-size: 14px; font-weight: 350; letter-spacing: .01em; }
+.closing-content .button { font-size: 12px; min-height: 48px; }
+
+/* Motion is purposeful: arrivals, navigation feedback, and changing results. */
+.scroll-progress { position: absolute; inset: auto 0 0; height: 2px; background: linear-gradient(90deg, #086caa, #62cbd2); transform-origin: left; pointer-events: none; z-index: 1; }
+.desktop-nav a.active::after { display: none; }
+.nav-indicator { position: absolute; left: 0; right: 0; bottom: 2px; height: 2px; background: #32a8b0; border-radius: 3px; }
+.button > svg, .text-link > svg, .round-link > svg, .back-top > svg { transition: transform .35s var(--ease-travel); }
+.button:active { transform: translateY(0) scale(.98); }
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { transform: translateY(28px); transition: opacity .85s var(--ease-travel), transform .85s var(--ease-travel); }
+  .reveal.revealed { transform: none; }
+  .reveal:focus-within { opacity: 1; transform: none; }
+  .reveal .section-label > span { transform: scaleX(.25); transform-origin: left; transition: transform 1s var(--ease-travel); }
+  .reveal.revealed .section-label > span { transform: scaleX(1); }
+  .hero-scroll > svg { animation: scroll-invitation 1.3s var(--ease-travel) 1.5s 3; }
+  .is-packed .custom-checkbox { animation: packed-in .35s var(--ease-travel); }
+  .faq-list details[open] p { animation: answer-in .3s var(--ease-travel); }
+  .destination-visual > img { transition: scale 1.2s var(--ease-travel); }
+  .photo-stamp { transition: transform .7s var(--ease-travel); }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .button:hover > svg:last-child, .text-link:hover > svg, .round-link:hover > svg { transform: translate(2px, -2px); }
+  .hero-actions .button:first-child:hover > svg { transform: translateY(3px); }
+  .back-top:hover > svg { transform: translateY(-3px); }
+  .nav-cta:hover .nav-cta-icon > svg { transform: scale(1.08); }
+  .destination-visual:hover > img { scale: 1.025; }
+  .destination-visual:hover .photo-stamp { transform: rotate(2deg) translateY(-5px); }
+}
+@keyframes scroll-invitation { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+@keyframes packed-in { 0% { transform: scale(.78); } 65% { transform: scale(1.13); } 100% { transform: scale(1); } }
+@keyframes answer-in { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 1150px) {
+  .hero { height: 685px; }
+  .hero h1 { font-size: 76px; }
+  .desktop-nav { gap: 24px; }
+  .countdown { gap: 27px; }
+  .countdown-unit:not(:last-child)::after { right: -16px; }
+  .destination-grid { gap: 46px; }
+  .destination-visual { height: 620px; }
+  .destination-facts { column-gap: 13px; }
+  .trip-fact strong { font-size: 13px; }
+  .trip-fact small { font-size: 10px; }
+  .trip-fact div > span { font-size: 9px; }
+  .day-tab strong { font-size: 12px; }
+  .timeline-time { font-size: 9px; }
+  .room-search-area { flex-wrap: wrap; }
+  .room-filters button { font-size: 12px; }
+}
+@media (min-width: 768px) and (max-width: 900px) {
+  .desktop-nav { gap: 18px; }
+  .desktop-nav a { font-size: 12px; }
+  .nav-container { gap: 17px; }
+  .nav-cta { padding-left: 14px; gap: 10px; font-size: 11px; }
+  .hero h1 { font-size: 67px; }
+  .hero-bottom { gap: 20px; }
+  .hero-bottom strong { font-size: 11px; }
+  .hero-meta-label { font-size: 8px; }
+  .trip-fact { gap: 8px; }
+  .fact-icon { width: 30px; height: 34px; }
+  .trip-fact strong { font-size: 12px; }
+  .trip-fact div > span { font-size: 8px; }
+  .destination-content h2 { font-size: 48px; }
+  .destination-content .section-description { font-size: 14px; }
+  .destination-visual { height: 670px; }
+}
+@media (max-width: 767px) {
+  .nav-cta { font-size: 11px; gap: 9px; padding: 6px 6px 6px 13px; }
+  .nav-cta-icon { width: 27px; height: 27px; }
+  .hero { min-height: 645px; height: min(760px, calc(100svh - 90px)); }
+  .hero-content { padding-top: 103px; }
+  .hero h1 { font-size: clamp(30px, 9.65vw, 74px); margin-top: 23px; }
+  .hero-line-sans { font-size: 1em; letter-spacing: -.055em; }
+  .hero-line-accent { font-size: 1.12em; line-height: 1.2; letter-spacing: -.055em; }
+  .hero-eyebrow { font-size: 9px; gap: 8px; letter-spacing: .14em; }
+  .hero-copy { font-size: 14px; line-height: 1.9; margin-top: 24px; }
+  .hero-actions { margin-top: 25px; gap: 9px; }
+  .hero-actions .button { padding-inline: 14px; min-height: 47px; font-size: 11px; }
+  .hero-bottom { bottom: 33px; padding-top: 23px; gap: 18px; }
+  .hero-bottom strong { font-size: 12px; }
+  .hero-meta-label { font-size: 8px; letter-spacing: .12em; }
+  .escape-seal { top: 22px; right: 22px; }
+  .section-label { font-size: 10px; line-height: 1.75; letter-spacing: .12em; }
+  .section-heading h2, .room-section-heading h2, .centered-heading h2 { font-size: clamp(34px, 7.8vw, 46px); line-height: 1.2; }
+  .destination-content h2 { font-size: clamp(41px, 9vw, 53px); }
+  .section-description, .destination-content .section-description,
+  .room-section-heading .section-description, .centered-heading .section-description { font-size: 14px; line-height: 1.85; }
+  .destination-visual { height: 400px; }
+  .photo-stamp { bottom: 128px; }
+  .destination-facts { gap: 25px 14px; }
+  .trip-fact strong { font-size: 12px; }
+  .trip-fact small { font-size: 10px; }
+  .trip-fact div > span { font-size: 9px; letter-spacing: .065em; }
+  .fact-icon { width: 33px; height: 36px; }
+  .countdown-heading .overline { font-size: 9px; }
+  .countdown-heading p { font-size: 17px; }
+  .countdown-unit strong { font-size: 39px; }
+  .room-stats strong { font-size: 29px; }
+  .room-stats div > span { font-size: 9px; }
+  .day-tab strong { font-size: 11px; }
+  .day-date { font-size: 9px; line-height: 1.5; }
+  .timeline-title h3 { font-size: 25px; }
+  .timeline-title p { font-size: 12px; }
+  .timeline-time { font-size: 11px; }
+  .timeline-event h4 { font-size: 13px; }
+  .timeline-event p { font-size: 12px; }
+  .room-filters button { font-size: 11px; }
+  .guest-list li { font-size: 15px; }
+  .room-card-footer, .room-card-footer > span:last-child { font-size: 10px; }
+  .essential p { font-size: 13px; }
+  .packing-list label { font-size: 12px; }
+  .faq-list summary, .faq-list details p { font-size: 13px; }
+  .organizer-copy h3 { font-size: 23px; }
+  .organizer-copy p { font-size: 12px; }
+  .closing-content h2 { font-size: clamp(37px, 9vw, 52px); }
+  .closing-content p { font-size: 13px; }
+}
+@media (max-width: 430px) {
+  .hero-content { width: calc(100% - 42px); }
+  .destination-visual { height: 355px; }
+  .trip-fact { gap: 8px; }
+  .trip-fact strong { font-size: 11px; }
+  .fact-icon { width: 30px; }
+  .trip-fact div > span { font-size: 8px; }
+  .packing-list { grid-template-columns: 1fr; gap: 5px; }
+  .packing-list label { min-height: 36px; font-size: 13px; }
+}
+@media (max-width: 360px) {
+  .brand-logo { width: 97px; }
+  .nav-container { gap: 8px; }
+  .nav-cta { font-size: 10px; gap: 7px; padding-left: 12px; }
+  .nav-cta-icon { width: 24px; height: 24px; }
+  .hero-content { width: calc(100% - 36px); }
+  .hero-eyebrow { font-size: 8px; gap: 7px; }
+  .hero-eyebrow .eyebrow-line { display: none; }
+  .hero-copy { font-size: 12px; }
+  .hero-actions .button { font-size: 9px; padding-inline: 11px; }
+  .hero-bottom strong { font-size: 10px; }
+  .hero-meta-label { font-size: 7px; }
+  .countdown-heading .overline { font-size: 8px; }
+  .countdown-heading p { font-size: 15px; }
+  .room-filters button { font-size: 10px; padding-inline: 5px; gap: 4px; }
+  .trip-fact strong { font-size: 10px; }
+  .day-tab strong { font-size: 10px; }
+  .day-date { font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-line > span, .hero-image, .escape-seal,
+  .hero-eyebrow, .hero-copy, .hero-actions, .hero-bottom,
+  .mobile-nav, .timeline-panel, .timeline li, .room-card {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .button:active, .button:hover { transform: none; }
+  .nav-indicator { transform: none !important; }
+}
